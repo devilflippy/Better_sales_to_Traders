@@ -1,7 +1,7 @@
 {
-    "name": "AfterDBLoadHook",
-    "version": "1.0.0",
-    "sptVersion": "~3.9",
+    "name": "Better sales to Traders",
+    "version": "0.0.1",
+    "sptVersion": "~3.9.x",
     "loadBefore": [],
     "loadAfter": [],
     "incompatibilities": [],
@@ -24,7 +24,7 @@
         "typescript": "5.4",
         "winston": "3.12"
     },
-    "author": "Chomp",
+    "author": "DevilFlippy",
     "contributors": [],
     "license": "MIT"
 }
