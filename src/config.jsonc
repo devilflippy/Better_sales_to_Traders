@@ -14,6 +14,9 @@
         // Bigger limits for buying from traders
         "enabled": true,
         "Limit_Multiplier": 2
+    },
+    "Disable_Selling_on_Flea": {
+        "sellingDisabled": true
     }
 }
 }

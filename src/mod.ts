@@ -29,8 +29,9 @@ class Mod implements IPostDBLoadMod
         const logger = container.resolve<ILogger>("WinstonLogger")
         const databaseServer = container.resolve<DatabaseServer>("DatabaseServer")
         const configServer = container.resolve<ConfigServer>("ConfigServer")
-        const traderConfig = configServer.getConfig<ITraderConfig>(ConfigTypes.TRADER)
         const tables: IDatabaseTables = databaseServer.getTables()
+        const globals = tables.globals.config
+        const traderConfig = configServer.getConfig<ITraderConfig>(ConfigTypes.TRADER)
         const prapor = tables.traders["54cb50c76803fa8b248b4571"]
         const therapist = tables.traders["54cb57776803fa99248b456e"]
         const ragman = tables.traders["5ac3b934156ae10c4430e83c"]
@@ -146,6 +147,20 @@ class Mod implements IPostDBLoadMod
                     log(error)
                 }
             }
+            if (config.EconomyOptions.Disable_Flea_Market_Completely.disable) {
+				try {
+					globals.RagFair.minUserLevel = 99
+				} catch (error) {
+					logger.warning("\nEconomyOptions.Disable_Flea_Market_Completely failed. Send bug report. Continue safely.")
+					log(error)
+				}
+			} else {
+				try {
+					globals.RagFair.minUserLevel = config.EconomyOptions.Fleamarket_Opened_at_Level.value
+				} catch (error) {
+					logger.warning("\nEconomyOptions.Fleamarket_Opened_at_Level failed. Send bug report. Continue safely.")
+					log(error)
+				}
         }
     }
 }
