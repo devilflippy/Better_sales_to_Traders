@@ -11,7 +11,10 @@ import { IDatabaseTables } from "@spt/models/spt/server/IDatabaseTables"
 import { LogTextColor } from "@spt/models/spt/logging/LogTextColor";
 import { LogBackgroundColor } from "@spt/models/spt/logging/LogBackgroundColor";
 
+import { VFS } from "@spt/utils/VFS"
+
 import { jsonc } from "jsonc"
+const debug = false // [Debug] Debug!
 class Mod implements IPostDBLoadMod
 {
     public preSptLoad(container: DependencyContainer): void 
@@ -25,11 +28,15 @@ class Mod implements IPostDBLoadMod
 
     public postDBLoad(container: DependencyContainer): void 
     {
+        const vfs = container.resolve<VFS>("VFS")
         const config = jsonc.parse(vfs.readFile(path.resolve(__dirname, "../config/config.jsonc")))
         const logger = container.resolve<ILogger>("WinstonLogger")
         const databaseServer = container.resolve<DatabaseServer>("DatabaseServer")
         const configServer = container.resolve<ConfigServer>("ConfigServer")
         const tables: IDatabaseTables = databaseServer.getTables()
+        const locales = tables.locales.global
+        const items = tables.templates.items
+        const handbook = tables.templates.handbook
         const globals = tables.globals.config
         const traderConfig = configServer.getConfig<ITraderConfig>(ConfigTypes.TRADER)
         const prapor = tables.traders["54cb50c76803fa8b248b4571"]
@@ -46,6 +53,7 @@ class Mod implements IPostDBLoadMod
         {
             if (config.TraderChanges.Better_Sales_To_Traders.enabled) 
             {
+                if (debug) 
                 {
                     for (const trader in traderlist) 
                     {
@@ -58,6 +66,7 @@ class Mod implements IPostDBLoadMod
                         log("]}")
                     }
                 }
+                if (debug) 
                 {
                     for (const trader in traderlist) 
                     {
@@ -83,13 +92,13 @@ class Mod implements IPostDBLoadMod
                         traderlist[trader].base.loyaltyLevels[3].buy_price_coef = 20
                     }
 
-                    peacekeeper.base.loyaltyLevels.forEach((x) => (x.buy_price_coef += 7))
-                    skier.base.loyaltyLevels.forEach((x) => (x.buy_price_coef += 6))
+                    peacekeeper.base.loyaltyLevels.forEach((x) => (x.buy_price_coef += 5))
+                    skier.base.loyaltyLevels.forEach((x) => (x.buy_price_coef += 5))
                     prapor.base.loyaltyLevels.forEach((x) => (x.buy_price_coef += 5))
-                    mechanic.base.loyaltyLevels.forEach((x) => (x.buy_price_coef += 4))
-                    jaeger.base.loyaltyLevels.forEach((x) => (x.buy_price_coef += 3))
-                    ragman.base.loyaltyLevels.forEach((x) => (x.buy_price_coef += 2))
-                    therapist.base.loyaltyLevels.forEach((x) => (x.buy_price_coef += 1))
+                    mechanic.base.loyaltyLevels.forEach((x) => (x.buy_price_coef += 5))
+                    jaeger.base.loyaltyLevels.forEach((x) => (x.buy_price_coef += 5))
+                    ragman.base.loyaltyLevels.forEach((x) => (x.buy_price_coef += 5))
+                    therapist.base.loyaltyLevels.forEach((x) => (x.buy_price_coef += 5))
                 }
                 catch (error) 
                 {
@@ -147,24 +156,47 @@ class Mod implements IPostDBLoadMod
                     log(error)
                 }
             }
-            if (config.EconomyOptions.Disable_Flea_Market_Completely.disable) {
-				try {
-					globals.RagFair.minUserLevel = 99
-				} catch (error) {
-					logger.warning("\nEconomyOptions.Disable_Flea_Market_Completely failed. Send bug report. Continue safely.")
-					log(error)
-				}
-			} else {
-				try {
-					globals.RagFair.minUserLevel = config.EconomyOptions.Fleamarket_Opened_at_Level.value
-				} catch (error) {
-					logger.warning("\nEconomyOptions.Fleamarket_Opened_at_Level failed. Send bug report. Continue safely.")
-					log(error)
-				}
+            if (config.EconomyOptions.Disable_Flea_Market_Completely.disable) 
+            {
+                try 
+                {
+                    globals.RagFair.minUserLevel = 99
+                }
+                catch (error) 
+                {
+                    logger.warning("\nEconomyOptions.Disable_Flea_Market_Completely failed. Send bug report. Continue safely.")
+                    log(error)
+                }
+            }
+            else 
+            {
+                try 
+                {
+                    globals.RagFair.minUserLevel = config.EconomyOptions.Fleamarket_Opened_at_Level.value
+                }
+                catch (error) 
+                {
+                    logger.warning("\nEconomyOptions.Fleamarket_Opened_at_Level failed. Send bug report. Continue safely.")
+                    log(error)
+                }
+                
+            }
+            
+        }
+        function getItemName(itemID, locale = "en") 
+        {
+            if (locales[locale][`${itemID} Name`] != undefined) 
+            {
+                // return items[itemID]._name
+                return locales[locale][`${itemID} Name`]
+            }
+            else 
+            {
+                return items[itemID]?._name
+            }
         }
     }
 }
-
 const log = (i: any) => 
 {
     console.log(i)
