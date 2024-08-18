@@ -31,14 +31,11 @@ class Mod implements IPostDBLoadMod
         const vfs = container.resolve<VFS>("VFS")
         const config = jsonc.parse(vfs.readFile(path.resolve(__dirname, "../config/config.jsonc")))
         const logger = container.resolve<ILogger>("WinstonLogger")
-        const databaseServer = container.resolve<DatabaseServer>("DatabaseServer")
-        const configServer = container.resolve<ConfigServer>("ConfigServer")
+        const databaseServer = container.resolve<DatabaseServer>("DatabaseServer") 
         const tables: IDatabaseTables = databaseServer.getTables()
         const locales = tables.locales.global
-        const items = tables.templates.items
-        const handbook = tables.templates.handbook
-        const globals = tables.globals.config
-        const traderConfig = configServer.getConfig<ITraderConfig>(ConfigTypes.TRADER)
+        const items = tables.templates.items  
+        const globals = tables.globals.config  
         const prapor = tables.traders["54cb50c76803fa8b248b4571"]
         const therapist = tables.traders["54cb57776803fa99248b456e"]
         const ragman = tables.traders["5ac3b934156ae10c4430e83c"]
