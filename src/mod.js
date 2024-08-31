@@ -9,6 +9,7 @@ const ConfigTypes_1 = require("C:/snapshot/project/obj/models/enums/ConfigTypes"
 const LogTextColor_1 = require("C:/snapshot/project/obj/models/spt/logging/LogTextColor");
 const LogBackgroundColor_1 = require("C:/snapshot/project/obj/models/spt/logging/LogBackgroundColor");
 const jsonc_1 = require("C:/snapshot/project/node_modules/jsonc");
+const buyCat = require("../config//buy_categories.json");
 const debug = false; // [Debug] Debug!
 class Mod {
     preSptLoad(container) {
@@ -22,13 +23,11 @@ class Mod {
         const config = jsonc_1.jsonc.parse(vfs.readFile(node_path_1.default.resolve(__dirname, "../config/config.jsonc")));
         const logger = container.resolve("WinstonLogger");
         const databaseServer = container.resolve("DatabaseServer");
-        const configServer = container.resolve("ConfigServer");
         const tables = databaseServer.getTables();
         const locales = tables.locales.global;
         const items = tables.templates.items;
-        const handbook = tables.templates.handbook;
         const globals = tables.globals.config;
-        const traderConfig = configServer.getConfig(ConfigTypes_1.ConfigTypes.TRADER);
+        
         const prapor = tables.traders["54cb50c76803fa8b248b4571"];
         const therapist = tables.traders["54cb57776803fa99248b456e"];
         const ragman = tables.traders["5ac3b934156ae10c4430e83c"];
