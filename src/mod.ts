@@ -155,6 +155,30 @@ class Mod implements IPostDBLoadMod
                     log(error)
                 }
             }
+            if (config.TraderChanges.Alternative_Categories.enabled) 
+            {
+                try 
+                {                   
+                        
+                    this.tables.traders[prapor].base.items_buy.category = buyCat.peacekeeper;
+                    this.tables.traders[therapist].base.items_buy.category = buyCat.ragman;
+                    this.tables.traders[ragman].base.items_buy.category = buyCat.jaeger;
+                    this.tables.traders[jaeger].base.items_buy.category = buyCat.prapor;
+                    this.tables.traders[mechanic].base.items_buy.category = buyCat.therapist;
+                    this.tables.traders[peacekeeper].base.items_buy.category = buyCat.skier;
+                    this.tables.traders[skier].base.items_buy.category = buyCat.mechanic;
+                    this.tables.traders[ref].base.items_buy.category = buyCat.mechanic;
+                        
+                }
+                catch (error) 
+                {
+                    logger.warning("\nTraderChanges.AlternativeCategories failed. Send bug report. Continue safely.")
+                    log(error)
+                }
+            }
+        }
+        if (config.EconomyOptions.enabled)
+        {
             if (config.EconomyOptions.Disable_Flea_Market_Completely.enabled) 
             {
                 try 
@@ -167,6 +191,7 @@ class Mod implements IPostDBLoadMod
                     log(error)
                 }
             }
+            
             else 
             {
                 try 
@@ -179,27 +204,6 @@ class Mod implements IPostDBLoadMod
                     log(error)
                 }
                 
-            }
-            if (config.TraderChanges.Alternative_Categories.enabled) 
-            {
-                try 
-                {                   
-                    
-                    this.tables.traders[prapor].base.items_buy.category = buyCat.peacekeeper;
-                    this.tables.traders[therapist].base.items_buy.category = buyCat.ragman;
-                    this.tables.traders[ragman].base.items_buy.category = buyCat.jaeger;
-                    this.tables.traders[jaeger].base.items_buy.category = buyCat.prapor;
-                    this.tables.traders[mechanic].base.items_buy.category = buyCat.therapist;
-                    this.tables.traders[peacekeeper].base.items_buy.category = buyCat.skier;
-                    this.tables.traders[skier].base.items_buy.category = buyCat.mechanic;
-                    this.tables.traders[ref].base.items_buy.category = buyCat.mechanic;
-                    
-                }
-                catch (error) 
-                {
-                    logger.warning("\nTraderChanges.AlternativeCategories failed. Send bug report. Continue safely.")
-                    log(error)
-                }
             }
             
         }

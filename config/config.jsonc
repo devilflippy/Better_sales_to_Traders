@@ -14,7 +14,11 @@
             // Bigger limits for buying from traders
             "enabled": true,
             "Limit_Multiplier": 2
-        }
+        },
+		"Alternative_Categories": {
+			// Realism buys categorie, but Rebalance for PTT.
+			"enabled": true
+		}
     
     },
     "EconomyOptions": {
