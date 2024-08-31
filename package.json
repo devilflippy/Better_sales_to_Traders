@@ -1,6 +1,6 @@
 {
     "name": "Better_Sales_To_Traders",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "sptVersion": "~3.9.x",
     "loadBefore": [],
     "loadAfter": [],
