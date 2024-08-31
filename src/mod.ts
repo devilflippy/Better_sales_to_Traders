@@ -36,7 +36,7 @@ class Mod implements IPostDBLoadMod
         const locales = tables.locales.global
         const items = tables.templates.items  
         const globals = tables.globals.config 
-        const buyCat = require("../../config//buy_categories.json"); 
+        const buyCat = require("../config/buy_categories.json"); 
         const prapor = tables.traders["54cb50c76803fa8b248b4571"]
         const therapist = tables.traders["54cb57776803fa99248b456e"]
         const ragman = tables.traders["5ac3b934156ae10c4430e83c"]
@@ -155,7 +155,7 @@ class Mod implements IPostDBLoadMod
                     log(error)
                 }
             }
-            if (config.EconomyOptions.Disable_Flea_Market_Completely.disable) 
+            if (config.EconomyOptions.Disable_Flea_Market_Completely.enabled) 
             {
                 try 
                 {
