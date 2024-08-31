@@ -160,14 +160,14 @@ class Mod implements IPostDBLoadMod
                 try 
                 {                   
                         
-                    this.tables.traders[prapor].base.items_buy.category = buyCat.peacekeeper;
-                    this.tables.traders[therapist].base.items_buy.category = buyCat.ragman;
-                    this.tables.traders[ragman].base.items_buy.category = buyCat.jaeger;
-                    this.tables.traders[jaeger].base.items_buy.category = buyCat.prapor;
-                    this.tables.traders[mechanic].base.items_buy.category = buyCat.therapist;
-                    this.tables.traders[peacekeeper].base.items_buy.category = buyCat.skier;
-                    this.tables.traders[skier].base.items_buy.category = buyCat.mechanic;
-                    this.tables.traders[ref].base.items_buy.category = buyCat.mechanic;
+                    prapor.base.items_buy.category.push(buyCat.prapor)
+                    therapist.base.items_buy.category.push(buyCat.therapist)
+                    ragman.base.items_buy.category.push(buyCat.ragman)
+                    jaeger.base.items_buy.category.push(buyCat.jaeger)
+                    mechanic.base.items_buy.category.push(buyCat.mechanic)
+                    peacekeeper.base.items_buy.category.push(buyCat.peacekeeper)
+                    skier.base.items_buy.category.push(buyCat.skier)
+                    ref.base.items_buy.category.push(buyCat.ref)
                         
                 }
                 catch (error) 
