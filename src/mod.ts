@@ -22,7 +22,7 @@ class Mod implements IPostDBLoadMod
         // Database will be empty in here
         const databaseServer = container.resolve<DatabaseServer>("DatabaseServer");
         const logger = container.resolve<ILogger>("WinstonLogger");
-        logger.logWithColor(`Database item table state: ${databaseServer.getTables().templates} (<<< should be undefined)`, LogTextColor.RED, LogBackgroundColor.YELLOW);
+        logger.info("Mod: Devil's Better sales to Traders", LogTextColor.GREEN);
 
     }
 
